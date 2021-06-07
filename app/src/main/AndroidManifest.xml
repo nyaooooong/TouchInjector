@@ -20,7 +20,12 @@
         <service
             android:name=".TouchInjectorService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+        </service>
+
     </application>
+    <!-- start : always popup to receive event -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- end : always popup to receive event -->
 
 </manifest>
