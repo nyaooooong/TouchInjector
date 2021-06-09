@@ -1,7 +1,11 @@
 package com.nrw.touchinjector
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
+import android.view.MotionEvent
 import com.nrw.touchinjector.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,5 +18,29 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.d("Key Code:", keyCode.toString())
+        when (keyCode) {
+            KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                Intent(this, TouchInjectorService::class.java).also { intent -> startService(intent)}
+            }
+            KeyEvent.KEYCODE_VOLUME_UP -> {
+                Intent(this, TouchInjectorService::class.java).also { intent -> stopService(intent)}
+            }
+        }
+        return false // If you handled the event, return true. If you want to allow the event to be handled by the next receiver, return false.
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        Log.d("Touch Event:", MotionEvent.actionToString(event.action))
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                Log.d("Motion Event:", "coord:"+ event.x +","+ event.y)
+            }
+        }
+        return false
     }
 }

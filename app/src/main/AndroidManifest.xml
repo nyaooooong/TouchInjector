@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nrw.touchinjector">
 
+    <!-- start : always popup to receive event -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+
+        <service
+            android:name=".TouchInjectorService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service android:name=".TouchInjectorJob"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+    </application> <!-- end : always popup to receive event -->
+    <!-- start : foreground service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>
