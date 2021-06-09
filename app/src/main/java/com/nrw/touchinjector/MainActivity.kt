@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.MotionEvent
 import com.nrw.touchinjector.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         Log.d("Key Code:", keyCode.toString())
         when (keyCode) {
@@ -29,5 +31,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return false // If you handled the event, return true. If you want to allow the event to be handled by the next receiver, return false.
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        Log.d("Touch Event:", MotionEvent.actionToString(event.action))
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                Log.d("Motion Event:", "coord:"+ event.x +","+ event.y)
+            }
+        }
+        return false
     }
 }

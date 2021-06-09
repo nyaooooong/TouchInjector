@@ -22,6 +22,5 @@ class TouchInjectorJob: JobIntentService() {
     override fun onHandleWork(intent: Intent) {
         Thread.sleep(1000)
         Log.d("TOUCH_INJECTOR", "here");
-        //TODO("Not yet implemented")
     }
 }
